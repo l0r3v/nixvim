@@ -6,7 +6,7 @@
     ./image.nix
     ./lsp.nix
     ./lualine.nix
-    ./luasnip.nix
+    ./luasnip/luasnip.nix
     ./neorg.nix
     ./oil.nix
     ./render-markdown.nix
