@@ -1,5 +1,5 @@
-_: {
-  opts = {
+{pkgs, ...}: {
+  plugins.neorg = {
     enable = true;
     modules = {
       "core.defaults" = {__empty = null;};

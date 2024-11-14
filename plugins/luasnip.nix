@@ -1,6 +1,5 @@
-_: {
-  #LUASNIP
-  opts = {
+{pkgs, ...}: {
+  plugins.luasnip = {
     enable = true;
     fromLua = [{} {paths = ../../config/nvim/LuaSnip;}];
     settings = {

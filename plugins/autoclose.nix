@@ -1,6 +1,5 @@
-_: {
-  #AUTOCLOSE
-  opts = {
+{pkgs, ...}: {
+  plugins.autoclose = {
     enable = true;
     keys = {
       "`" = {

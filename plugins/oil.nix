@@ -1,6 +1,5 @@
-_: {
-  #OIL
-  opts = {
+{pkgs, ...}: {
+  plugins.oil = {
     enable = true;
     settings = {
       columns = [

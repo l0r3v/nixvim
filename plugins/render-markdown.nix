@@ -1,6 +1,5 @@
-_: {
-  #RENDER-MARKDOWN
-  opts = {
+{pkgs, ...}: {
+  plugins.render-markdown = {
     enable = true;
     settings = {
       bullet = {

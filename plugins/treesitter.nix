@@ -1,5 +1,5 @@
-_: {
-  opts = {
+{pkgs, ...}: {
+  plugins.treesitter = {
     enable = true;
     nixvimInjections = true;
     languageRegister = {

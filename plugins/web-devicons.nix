@@ -1,3 +1,3 @@
-_: {
-  opts.enable = true;
+{pkgs, ...}: {
+  plugins.web-devicons.enable = true;
 }

@@ -1,6 +1,5 @@
-_: {
-  #CMP
-  opts = {
+{pkgs, ...}: {
+  plugins.cmp = {
     enable = true;
     settings = {
       completion = {
