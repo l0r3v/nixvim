@@ -7,4 +7,5 @@
     ./config
     ./plugins
   ];
+  colorschemes.gruvbox.enable = true;
 }
