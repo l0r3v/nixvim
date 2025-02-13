@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   plugins.autoclose = {
     enable = true;
-    keys = {
+    settings.keys = {
       "`" = {
         escape = false;
         close = false;
@@ -14,7 +14,7 @@
       };
     };
     options = {
-      autoIndent = true;
+      auto_indent = true;
     };
   };
 }
