@@ -10,7 +10,7 @@
     settings = {
       highlight.enable = true;
       indent.enable = true;
-      auto_install = true;
+      auto_install = false;
       incremental_selection = {
         enable = true;
         keymaps = {

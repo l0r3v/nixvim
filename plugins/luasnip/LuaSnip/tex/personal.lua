@@ -222,7 +222,7 @@ return {
 	),
 
 	-- Snippet
-	s({trig = "tbb", dscr = "Expands 'tbb' into LaTeX's textit{} command.",snippetType="autosnippet"},
+	s({trig = "tbb", dscr = "Expands 'tbb' into LaTeX's textbf{} command.",snippetType="autosnippet"},
 	fmta("\\textbf{<>}",
 	{
 		d(1, get_visual),

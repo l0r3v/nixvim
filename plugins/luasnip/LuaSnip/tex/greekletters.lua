@@ -60,12 +60,12 @@ return {
 	),
 
 	-- Snippet
-	s({trig="@b",snippetType="autosnippet",condition=tex_utils.in_mathzone},
+	s({trig="@b",desc="insert beta",snippetType="autosnippet",condition=tex_utils.in_mathzone},
 	{t("{\\beta}"),}
 	),
 
 	-- Snippet
-	s({trig="@q",snippetType="autosnippet",condition=tex_utils.in_mathzone},
+	s({trig="@q",desc="theta",nippetType="autosnippet",condition=tex_utils.in_mathzone},
 	{t("{\\theta}"),}
 	),
 
