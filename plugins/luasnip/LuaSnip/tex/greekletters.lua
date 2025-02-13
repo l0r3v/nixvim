@@ -65,7 +65,7 @@ return {
 	),
 
 	-- Snippet
-	s({trig="@q",desc="theta",nippetType="autosnippet",condition=tex_utils.in_mathzone},
+	s({trig="@q",desc="theta",snippetType="autosnippet",condition=tex_utils.in_mathzone},
 	{t("{\\theta}"),}
 	),
 

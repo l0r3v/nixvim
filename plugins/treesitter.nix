@@ -8,7 +8,10 @@
       ];
     };
     settings = {
-      highlight.enable = true;
+      highlight ={
+        enable = true;
+        disable = ["latex"];
+      };
       indent.enable = true;
       auto_install = false;
       incremental_selection = {
