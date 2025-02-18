@@ -13,7 +13,7 @@
         pair = "''";
       };
     };
-    options = {
+    settings.options = {
       auto_indent = true;
     };
   };
