@@ -10,7 +10,7 @@
       performance = {
         debounce = 60;
         fetchingTimeout = 200;
-        maxViewEntries = 30;
+        maxViewEntries = 20;
       };
       snippet = {
         expand = ''
@@ -44,7 +44,7 @@
       };
 
       mapping = {
-        "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+        "<C-l>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
         "<C-j>" = "cmp.mapping.select_next_item()";
         "<C-k>" = "cmp.mapping.select_prev_item()";
         "<C-e>" = "cmp.mapping.abort()";
@@ -53,17 +53,17 @@
         "<C-Space>" = "cmp.mapping.complete()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";
         "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
-        "<C-l>" = ''
+        "<Tab>" = ''
           cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
+            if require("luasnip").expand_or_locally_jumpable() then
+              require("luasnip").expand_or_jump()
             end
           end, { 'i', 's' })
         '';
-        "<C-h>" = ''
+        "<S-Tab>" = ''
           cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
+            if require("luasnip").locally_jumpable(-1) then
+              require("luasnip").jump(-1)
             end
           end, { 'i', 's' })
         '';
