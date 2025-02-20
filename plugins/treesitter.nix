@@ -8,7 +8,7 @@
       ];
     };
     settings = {
-      highlight ={
+      highlight = {
         enable = true;
         disable = ["latex"];
       };
