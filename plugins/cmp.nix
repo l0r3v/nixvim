@@ -1,4 +1,14 @@
 {pkgs, ...}: {
+  ## This two plugins installation are stolen from   
+  ## https://github.com/JMartJonesy/kickstart.nixvim/blob/standalone/config/plugins/nvim-cmp.nix
+  plugins.cmp-nvim-lsp = {
+    enable = true;
+  };
+
+  # https://nix-community.github.io/nixvim/plugins/cmp-path.html
+  plugins.cmp-path = {
+    enable = true;
+  };  
   plugins.cmp = {
     enable = true;
     settings = {
@@ -23,14 +33,14 @@
       sources = [
         {
           name = "nvim_lsp";
-          keywordLength = 5;
+          keywordLength = 3;
         }
         #{name = "neorg";}
-        {
-          name = "buffer"; # text within current buffer
-          #option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-          keywordLength = 5;
-        }
+       #{
+       #  name = "buffer"; # text within current buffer
+       #  #option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+       #  keywordLength = 5;
+       #}
         {
           name = "path"; # file system paths
           keywordLength = 3;
@@ -58,7 +68,6 @@
       #  "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
       #};
       mapping = {
-        "<C-l>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
         "<C-j>" = "cmp.mapping.select_next_item()";
         "<C-k>" = "cmp.mapping.select_prev_item()";
         "<C-e>" = "cmp.mapping.abort()";
@@ -67,14 +76,14 @@
         "<C-Space>" = "cmp.mapping.complete()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";
         "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
-        "<C-h>" = ''
+        "<C-l>" = ''
           cmp.mapping(function()
             if require("luasnip").expand_or_locally_jumpable() then
               require("luasnip").expand_or_jump()
             end
           end, { 'i', 's' })
         '';
-        "<C-b>" = ''
+        "<C-h>" = ''
           cmp.mapping(function()
             if require("luasnip").locally_jumpable(-1) then
               require("luasnip").jump(-1)
