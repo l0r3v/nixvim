@@ -81,27 +81,33 @@ return {
     -- SECTION
     s({trig="h1", snippetType="autosnippet"},
       fmta(
-        [[\section{<>}]],
+        [[\section{<>}
+        <>]],
         {
           d(1, get_visual),
+          i(2)
         }
       )
     ),
     -- SUBSECTION
     s({trig="h2", snippetType="autosnippet"},
       fmta(
-        [[\subsection{<>}]],
+        [[\subsection{<>}
+        <>]],
         {
           d(1, get_visual),
+          i(2)
         }
       )
     ),
     -- SUBSUBSECTION
     s({trig="h3", snippetType="autosnippet"},
       fmta(
-        [[\subsubsection{<>}]],
+        [[\subsubsection{<>}
+        <>]],
         {
           d(1, get_visual),
+          i(2)
         }
       )
     ),
