@@ -16,10 +16,8 @@
     settings.options = {
       auto_indent = true;
       disabled_filetypes = [
-        "tex"
         "text"
       ];
-      disable_command_mode = true;
     };
   };
 }
