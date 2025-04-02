@@ -19,7 +19,7 @@
       experimental = {ghost_text = true;};
       performance = {
         debounce = 60;
-        fetchingTimeout = 200;
+        fetchingTimeout = 500;
         maxViewEntries = 20;
       };
       snippet = {
