@@ -76,14 +76,14 @@
         "<C-Space>" = "cmp.mapping.complete()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";
         "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
-        "<C-l>" = ''
+        "<Tab>" = ''
           cmp.mapping(function()
             if require("luasnip").expand_or_locally_jumpable() then
               require("luasnip").expand_or_jump()
             end
           end, { 'i', 's' })
         '';
-        "<C-h>" = ''
+        "<S-Tab>" = ''
           cmp.mapping(function()
             if require("luasnip").locally_jumpable(-1) then
               require("luasnip").jump(-1)
