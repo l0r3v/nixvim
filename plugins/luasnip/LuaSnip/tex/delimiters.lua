@@ -47,7 +47,7 @@ end
 return {
 
 	s({trig="(",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	fmta( "\\left( <> \\right",
+	fmta( "\\left( <> \\right)",
 	{
 		i(1),
 	}
@@ -55,7 +55,7 @@ return {
 	),
 
 	s({trig="[",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	fmta( "\\left[ <> \\right",
+	fmta( "\\left[ <> \\right]",
 	{
 		i(1),
 	}

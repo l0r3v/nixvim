@@ -17,6 +17,7 @@
       auto_indent = true;
       disabled_filetypes = [
         "text"
+        "tex"
       ];
     };
   };
