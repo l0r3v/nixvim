@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  ## This two plugins installation are stolen from   
+  ## This two plugins installation are stolen from
   ## https://github.com/JMartJonesy/kickstart.nixvim/blob/standalone/config/plugins/nvim-cmp.nix
   plugins.cmp-nvim-lsp = {
     enable = true;
@@ -8,7 +8,7 @@
   # https://nix-community.github.io/nixvim/plugins/cmp-path.html
   plugins.cmp-path = {
     enable = true;
-  };  
+  };
   plugins.cmp = {
     enable = true;
     settings = {
@@ -36,11 +36,11 @@
           keywordLength = 3;
         }
         #{name = "neorg";}
-       #{
-       #  name = "buffer"; # text within current buffer
-       #  #option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-       #  keywordLength = 5;
-       #}
+        #{
+        #  name = "buffer"; # text within current buffer
+        #  #option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+        #  keywordLength = 5;
+        #}
         {
           name = "path"; # file system paths
           keywordLength = 3;
