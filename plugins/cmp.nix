@@ -18,9 +18,9 @@
       autoEnableSources = true;
       experimental = {ghost_text = true;};
       performance = {
-        debounce = 60;
+        debounce = 100;
         fetchingTimeout = 500;
-        maxViewEntries = 20;
+        maxViewEntries = 5;
       };
       snippet = {
         expand = ''
