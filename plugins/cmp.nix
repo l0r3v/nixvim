@@ -80,6 +80,8 @@
           cmp.mapping(function()
             if require("luasnip").expand_or_locally_jumpable() then
               require("luasnip").expand_or_jump()
+            else
+              fallback()
             end
           end, { 'i', 's' })
         '';
@@ -87,6 +89,8 @@
           cmp.mapping(function()
             if require("luasnip").locally_jumpable(-1) then
               require("luasnip").jump(-1)
+            else
+              fallback()
             end
           end, { 'i', 's' })
         '';
