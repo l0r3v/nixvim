@@ -62,7 +62,3 @@ And the theme specified in my Stylix configuration is applied directly!
 ## Contributing
 
 If you want to contribute to this configuration, feel free to fork it and submit a pull request. Any improvements or suggestions are welcome!
-
-## License
-
-This configuration is licensed under the [MIT](LICENSE) license.
