@@ -17,5 +17,6 @@
     ./treesitter.nix
     ./vimtex.nix
     ./web-devicons.nix
+    ./nvim-ufo.nix
   ];
 }
