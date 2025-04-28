@@ -17,7 +17,7 @@
           enable = true;
           settings = 
             let 
-              flake = '' (builtins.getFlake "${self}")'';
+              flake = '' (builtins.getFlake "/home/lorev/nixos-config/")'';
             in
             {
             nixpkgs = {
@@ -28,7 +28,7 @@
             };
             options = {
               nixvim = {
-                expr = ''${flake}.packages.x86_64-linux.neovimNixvim.options'';
+                expr = ''${flake}.inputs.nixvim.packages.x86_64-linux.neovimNixvim.options'';
               };
               nixos = {
                 expr = ''${flake}.nixosConfigurations.XPSnixos.options'';
