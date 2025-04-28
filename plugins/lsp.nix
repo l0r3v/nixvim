@@ -28,7 +28,7 @@
             };
             options = {
               nixvim = {
-                expr = ''${flake}.inputs.nixvim.packages.x86_64-linux.neovimNixvim.options'';
+                expr = ''${flake}.inputs.nixvim.packages.x86_64-linux.default.options'';
               };
               nixos = {
                 expr = ''${flake}.nixosConfigurations.XPSnixos.options'';
