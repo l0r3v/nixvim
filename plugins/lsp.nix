@@ -23,17 +23,17 @@
               '';
             };
             formatting = {
-              command = ["alejandra"];
+              command = ["alejandra ."];
             };
             options = {
               nixvim = {
-                expr = ''(builtins.getFlake "/home/lorev/nixos-config").packages.x86_64-linux.neovimNixvim.options'';
+                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").packages.x86_64-linux.neovimNixvim.options'';
               };
               nixos = {
-                expr = ''(builtins.getFlake "/home/lorev/nixos-config").nixosConfigurations.XPSnixos.options'';
+                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").nixosConfigurations.XPSnixos.options'';
               };
               home_manager = {
-                expr = ''(builtins.getFlake "/home/lorev/nixos-config").homeConfigurations.lorev.options'';
+                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").homeConfigurations.lorev.options'';
               };
             };
           };
