@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, self, lib, ...}: {
   plugins = {
     lsp = {
       enable = true;
@@ -15,25 +15,26 @@
 
         nixd = {
           enable = true;
-          settings = {
+          settings = 
+            let 
+              flake = '' (builtins.getFlake "${self}")'';
+            in
+            {
             nixpkgs = {
-              expr = ''
-                import <nixpkgs> {}
-                import (builtins.getFlake \"/home/lorev/nixos-config\").inputs.nixpkgs { }
-              '';
+              expr = "import ${flake}.inputs.nixpkgs { }";
             };
             formatting = {
-              command = ["alejandra ."];
+              command = ["${lib.getExe pkgs.alejandra}"];
             };
             options = {
               nixvim = {
-                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").packages.x86_64-linux.neovimNixvim.options'';
+                expr = ''${flake}.packages.x86_64-linux.neovimNixvim.options'';
               };
               nixos = {
-                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").nixosConfigurations.XPSnixos.options'';
+                expr = ''${flake}.nixosConfigurations.XPSnixos.options'';
               };
               home_manager = {
-                expr = ''(builtins.getFlake \"/home/lorev/nixos-config\").homeConfigurations.lorev.options'';
+                expr = ''${flake}.homeConfigurations.lorev.options'';
               };
             };
           };
