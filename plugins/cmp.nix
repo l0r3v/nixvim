@@ -36,11 +36,11 @@
           keywordLength = 3;
         }
         #{name = "neorg";}
-        #{
-        #  name = "buffer"; # text within current buffer
-        #  #option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-        #  keywordLength = 5;
-        #}
+        {
+          name = "buffer"; # text within current buffer
+          option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+          keywordLength = 5;
+        }
         {
           name = "path"; # file system paths
           keywordLength = 3;
