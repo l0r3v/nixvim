@@ -1,4 +1,8 @@
-{pkgs, self, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   plugins = {
     lsp = {
       enable = true;
@@ -15,11 +19,9 @@
 
         nixd = {
           enable = true;
-          settings = 
-            let 
-              flake = '' (builtins.getFlake "/home/lorev/nixos-config/")'';
-            in
-            {
+          settings = let
+            flake = ''(builtins.getFlake "/home/lorev/nixos-config/")'';
+          in {
             nixpkgs = {
               expr = "import ${flake}.inputs.nixpkgs { }";
             };

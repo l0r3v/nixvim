@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   plugins.neorg = {
     enable = true;
     settings.load = {

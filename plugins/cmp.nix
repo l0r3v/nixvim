@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   ## This two plugins installation are stolen from
   ## https://github.com/JMartJonesy/kickstart.nixvim/blob/standalone/config/plugins/nvim-cmp.nix
   plugins.cmp-nvim-lsp = {

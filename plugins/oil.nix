@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   plugins.oil = {
     enable = true;
     settings = {

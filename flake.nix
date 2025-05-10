@@ -45,16 +45,37 @@
     );
 
     packages = forAllSystems (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
-        mkNixvim = specialArgs:
-          nixvim.legacyPackages.${system}.makeNixvimWithModule {
-            inherit pkgs;
-
-            module = ./.;
+      system: {
+        default = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+          module = {
+            pkgs,
+            lib,
+            config,
+            ...
+          }: {
+            imports = [
+              (import ./. {
+                inherit pkgs lib config;
+                mode = "bare";
+              })
+            ];
           };
-      in {
-        default = mkNixvim {};
+        };
+        full = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+          module = {
+            pkgs,
+            lib,
+            config,
+            ...
+          }: {
+            imports = [
+              (import ./. {
+                inherit pkgs lib config;
+                mode = "bare";
+              })
+            ];
+          };
+        };
       }
     );
   };

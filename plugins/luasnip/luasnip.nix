@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   plugins.luasnip = {
     enable = true;
     fromLua = [{} {paths = ./LuaSnip;}];

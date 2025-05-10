@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   plugins.telekasten = {
     enable = true;
     settings.home = {

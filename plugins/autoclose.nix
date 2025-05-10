@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   plugins.autoclose = {
     enable = true;
     settings.keys = {
