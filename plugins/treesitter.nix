@@ -25,4 +25,25 @@
       };
     };
   };
+  plugins.treesitter-context = {
+    enable = true;
+    settings = {
+      line_numbers = true;
+      max_lines = 0;
+      min_window_height = 0;
+      mode = "cursor";
+      multiline_threshold = 0;
+      separator = "-";
+      trim_scope = "inner";
+      zindex = 10;
+    };
+  };
+  plugins.treesitter-refactor = {
+    enable = true;
+    highlightDefinitions = {
+      enable = true;
+      # Set to false if you have an `updatetime` of ~100.
+      clearOnCursorMove = false;
+    };
+  };
 }
