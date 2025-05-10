@@ -71,7 +71,7 @@
             imports = [
               (import ./. {
                 inherit pkgs lib config;
-                mode = "bare";
+                mode = "full";
               })
             ];
           };
