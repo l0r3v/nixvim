@@ -2,11 +2,6 @@
   plugins.treesitter = {
     enable = true;
     nixvimInjections = true;
-    languageRegister = {
-      markdown = [
-        "telekasten"
-      ];
-    };
     settings = {
       highlight = {
         enable = true;
