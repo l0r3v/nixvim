@@ -23,6 +23,13 @@ To install it, you can add it to your flake inputs:
       inputs.nixpkgs.follows = "nixpkgs";
     };
 ```
+There are two different packages in the flake, "default" (or "bare") and "full". The only difference is in the luasnip, vimtex and cmp plugins. 
+Basically I am using the "bare" package for my homelab and full for my laptop. The default is "bare", so to access the "full" package you have to write:
+
+```bash
+    nix run github:Iorev/nixvim-config#full
+```
+
 
 #### Bonus
 The Nixvim configuration does not come with a pre-installed theme. This is because I manage everything with Stylix, which supports Nixvim.
@@ -38,6 +45,11 @@ let
 
 And the theme specified in my Stylix configuration is applied directly!
 
+Note: If you want to install the full package you just have to substitute "default" with "full" like this:
+
+```nix
+    nixvim-package = inputs.nixvim.packages.${system}.full;
+```
 ### Installed packages 
 
 - **luasnip**
@@ -51,10 +63,7 @@ And the theme specified in my Stylix configuration is applied directly!
 - **neorg**
 - **oil**
 - **render-markdown**
-- **telekasten**
 - **telescope**
-- **treesitter-context**
-- **treesitter-refactor**
 - **treesitter**
 - **vimtex**
 - **web-devicons**
