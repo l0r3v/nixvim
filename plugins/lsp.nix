@@ -20,7 +20,7 @@
         nixd = {
           enable = true;
           settings = let
-            flake = ''(builtins.getFlake "/home/lorev/nixos-config/")'';
+            flake = ''(builtins.getFlake "/home/lorev/nixos/")'';
           in {
             nixpkgs = {
               expr = "import ${flake}.inputs.nixpkgs { }";
