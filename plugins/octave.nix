@@ -5,7 +5,7 @@ extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
         owner = "gnu-octave";
         repo = "vim-octave";
         rev = "61268df";
-        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        hash = "sha256-HfcmlQPMwef4fnBMV4rgt/tASlfTXJr82uG1fcNSINw=";
     };
 })];
 }

@@ -15,6 +15,7 @@ in {
         lua_ls.enable = true;
         texlab.enable = true;
         clangd.enable = true;
+        matlab_ls.enable = true;
         rust_analyzer = {
           enable = true;
           installRustc = true;
