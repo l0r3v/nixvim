@@ -51,11 +51,12 @@
             pkgs,
             lib,
             config,
+            system,
             ...
           }: {
             imports = [
               (import ./. {
-                inherit pkgs lib config;
+                inherit pkgs lib config system;
                 mode = "bare";
               })
             ];
@@ -66,11 +67,12 @@
             pkgs,
             lib,
             config,
+            system,
             ...
           }: {
             imports = [
               (import ./. {
-                inherit pkgs lib config;
+                inherit pkgs lib config system;
                 mode = "full";
               })
             ];

@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  system,
   ...
 }: let
   inherit (lib) getExe;
+  inherit (pkgs.stdenv.hostPlatform) system;
 in {
   plugins = {
     lsp = {
