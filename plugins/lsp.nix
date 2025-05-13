@@ -1,11 +1,15 @@
 {
   pkgs,
   lib,
+  system,
   ...
-}: {
+}: let
+  inherit (lib) getExe;
+in {
   plugins = {
     lsp = {
       enable = true;
+      inlayHints = true;
       servers = {
         ts_ls.enable = true;
         lua_ls.enable = true;
@@ -26,17 +30,14 @@
               expr = "import ${flake}.inputs.nixpkgs { }";
             };
             formatting = {
-              command = ["${lib.getExe pkgs.alejandra}"];
+              command = ["${getExe pkgs.alejandra}"];
             };
             options = {
               nixvim = {
-                expr = ''${flake}.inputs.nixvim.packages.x86_64-linux.default.options'';
+                expr = ''${flake}.inputs.nixvim.packages.${system}.default.options'';
               };
               nixos = {
                 expr = ''${flake}.nixosConfigurations.XPSnixos.options'';
-              };
-              home_manager = {
-                expr = ''${flake}.homeConfigurations.lorev.options'';
               };
             };
           };

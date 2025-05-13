@@ -1,16 +1,19 @@
-{ lib, config, ... }:
 {
-    plugins.which-key = {
-      enable = true;
-      settings = {
-        icons = {
-          breadcrumb = "»";
-          group = "+";
-          separator = ""; # ➜
-        };
-        win = {
-          border = "none";
-          wo.winblend = 0;
+  lib,
+  config,
+  ...
+}: {
+  plugins.which-key = {
+    enable = true;
+    settings = {
+      icons = {
+        breadcrumb = "»";
+        group = "+";
+        separator = ""; # ➜
+      };
+      win = {
+        border = "none";
+        wo.winblend = 0;
       };
     };
   };
