@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{...}: {
   plugins.which-key = {
     enable = true;
     settings = {
