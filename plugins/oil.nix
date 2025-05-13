@@ -1,9 +1,13 @@
 {...}: {
-  plugins.oil = {
+  plugins=
+  {
+    oil = {
     enable = true;
     settings = {
       columns = [
         "icon"
+        "size"
+        "mtime"
       ];
       keymaps = {
         "<C-c>" = false;
@@ -21,7 +25,7 @@
       };
       skip_confirm_for_simple_edits = true;
       view_options = {
-        show_hidden = true;
+        show_hidden = false;
       };
       win_options = {
         concealcursor = "ncv";
@@ -29,10 +33,12 @@
         cursorcolumn = false;
         foldcolumn = "0";
         list = false;
-        signcolumn = "no";
+        signcolumn = "auto";
         spell = false;
         wrap = false;
       };
     };
   };
+      oil-git-status.enable = true;
+    };
 }
