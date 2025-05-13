@@ -24,7 +24,7 @@ in {
         nixd = {
           enable = true;
           settings = let
-            flake = ''(builtins.getFlake "/home/lorev/nixos/")'';
+            flake = ''(builtins.getFlake (builtins.toString ./.))'';
           in {
             nixpkgs = {
               expr = "import ${flake}.inputs.nixpkgs { }";
@@ -42,7 +42,6 @@ in {
         };
       };
     };
-  };
   # extraConfigLua = ''
   #   require("lspconfig")["gdscript"].setup({
   #   	name = "godot",
