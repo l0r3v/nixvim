@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./alpha.nix
     ./autoclose.nix
     ./helpview.nix
     ./image.nix

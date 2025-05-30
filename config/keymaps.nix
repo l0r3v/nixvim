@@ -53,11 +53,11 @@
   '';
   extraConfigLua = ''
           local tlsc = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>pf', tlsc.find_files, {})
+            vim.keymap.set('n', '<leader>ff', tlsc.find_files, {})
             vim.keymap.set('n', '<leader>fb', tlsc.buffers, {})
             vim.keymap.set('n', '<C-p>', tlsc.git_files, {})
 
-            vim.keymap.set('n', '<leader>ps', function()
+            vim.keymap.set('n', '<leader>fs', function()
               tlsc.grep_string({ search = vim.fn.input("Grep > ")})
             end)
           -- Launch panel if nothing is typed after <leader>z

@@ -27,15 +27,18 @@
         line_numbers = true;
         max_lines = 0;
         min_window_height = 0;
-        mode = "cursor";
-        multiline_threshold = 0;
+        mode = "topline";
+        multiline_threshold = 20;
         separator = "-";
         trim_scope = "inner";
-        zindex = 10;
+        zindex = 20;
       };
     };
     treesitter-refactor = {
       enable = true;
+      highlightCurrentScope.enable = true;
+      navigation.enable = true;
+      smartRename.enable = true;        
       highlightDefinitions = {
         enable = true;
         # Set to false if you have an `updatetime` of ~100.
