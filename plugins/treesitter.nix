@@ -38,7 +38,7 @@
       enable = true;
       highlightCurrentScope.enable = true;
       navigation.enable = true;
-      smartRename.enable = true;        
+      smartRename.enable = true;
       highlightDefinitions = {
         enable = true;
         # Set to false if you have an `updatetime` of ~100.

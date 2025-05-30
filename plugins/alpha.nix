@@ -1,7 +1,6 @@
 {...}: {
   plugins.alpha = {
     enable = true;
-    theme = "dashboard"; 
-
+    theme = "dashboard";
   };
 }
