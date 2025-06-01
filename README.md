@@ -30,9 +30,8 @@ Basically I am using the "bare" package for my homelab and full for my laptop. T
     nix run github:Iorev/nixvim-config#full
 ```
 
-
 #### Bonus
-The Nixvim configuration does not come with a pre-installed theme. This is because I manage everything with Stylix, which supports Nixvim.
+My Nixvim configuration does not come with a pre-installed theme. This is because I manage everything with Stylix, which supports Nixvim.
 In my `home.nix` I have:
 
 ```nix
