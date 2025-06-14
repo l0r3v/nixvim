@@ -1,0 +1,55 @@
+name: Update Nix Flakes and Create PR
+
+on:
+  schedule:
+    - cron: '0 13 * * *' 
+  workflow_dispatch:
+jobs:
+  update-flake:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: nixos-host
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Aggiorna flake.lock
+        run: | 
+          git config user.name "l0r3v"
+          git config user.email "lorenzopasqui@gmail.com"
+          git fetch origin
+          if git ls-remote --exit-code --heads origin flake-update; then
+            git checkout flake-update
+            git pull --rebase origin flake-update 
+            echo "branch esiste"
+          else
+            git checkout -b flake-update
+          fi
+          nix flake update --flake . 
+          git config user.name "Gitea Actions"
+          git config user.email "info@pasqui.casa"
+          git add .
+          if ! git diff --quiet; then
+            git commit -m "chore: updated flakes"
+            git push origin HEAD
+          else
+            echo "Nessun cambiamento da committare"
+            echo "should_continue=false" >> $GITHUB_OUTPUT
+          fi
+        env: 
+          NIX_CONFIG: "access-tokens = github.com=${{ secrets.GH_TOKEN }}"
+
+      - name: login to gitea
+        run: |
+          tea login delete git.pasqui.casa 2>/dev/null || true
+          tea login add -u https://git.pasqui.casa -t ${{ secrets.GT_TOKEN }}
+
+      - name: Check for existing PR
+        run: |
+          if tea pr list --state open | grep -q "chore: update flakes"; then
+            echo "pr already exists"
+          else
+            echo "Creating PR"
+            tea pr create --head flake-update --base main --title "chore: update flakes" -a "lorev" || true
+          fi

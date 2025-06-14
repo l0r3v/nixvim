@@ -1,0 +1,21 @@
+
+name: Build/Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build/Test
+    runs-on: nixos-host
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Nix packages
+        run: nix build .#full
