@@ -20,3 +20,5 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
       - name: Build Nix packages
         run: nix build .#full
+      - name: Run and closes
+        run: nix run .#full -- --headless "+quit"
