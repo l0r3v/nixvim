@@ -53,13 +53,12 @@ Note: If you want to install the full package you just have to substitute "defau
 
 - **luasnip**
 - **autoclose**
-- **cmp**
+- **blink-cmp**
 - **dap**
 - **helpview**
 - **image**
 - **lsp**
 - **lualine**
-- **neorg**
 - **oil**
 - **render-markdown**
 - **telescope**
