@@ -13,5 +13,6 @@
     ./telescope.nix
     ./treesitter.nix
     ./web-devicons.nix
+    ./mini.nix
   ];
 }
