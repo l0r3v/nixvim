@@ -27,7 +27,7 @@ in {
           ghost_text.enabled = true;
         };
         keymap = {
-          preset = "super-tab";
+          preset = "default";
         };
         signature = {
           enabled = true;
