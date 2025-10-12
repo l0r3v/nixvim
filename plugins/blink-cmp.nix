@@ -14,6 +14,7 @@ in {
           use_nvim_cmp_as_default = false;
         };
         completion = {
+          trigger.show_in_snippet = false;
           accept = {
             auto_brackets = {
               enabled = true;
@@ -27,16 +28,7 @@ in {
           ghost_text.enabled = true;
         };
         keymap = {
-          "<Tab>" = [
-            "blink_visible_next"
-            "luasnip_expand_or_jump"
-            "fallback"
-          ];
-          "<S-Tab>" = [
-            "blink_visible_prev"
-            "luasnip_jump_prev"
-            "fallback"
-          ];
+          preset = "super-tab";
         };
         signature = {
           enabled = true;
