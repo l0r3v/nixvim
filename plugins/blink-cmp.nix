@@ -14,7 +14,6 @@ in {
           use_nvim_cmp_as_default = false;
         };
         completion = {
-          trigger.show_in_snippet = false;
           accept = {
             auto_brackets = {
               enabled = true;
