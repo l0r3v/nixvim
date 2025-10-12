@@ -27,7 +27,16 @@ in {
           ghost_text.enabled = true;
         };
         keymap = {
-          preset = "default";
+          "<Tab>" = [
+            "blink_visible_next"
+            "luasnip_expand_or_jump"
+            "fallback"
+          ];
+          "<S-Tab>" = [
+            "blink_visible_prev"
+            "luasnip_jump_prev"
+            "fallback"
+          ];
         };
         signature = {
           enabled = true;

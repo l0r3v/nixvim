@@ -42,21 +42,6 @@
   ]; #end of remap
   extraConfigVim = ''
          let maplocalleader = ","
-    " Tab in insert e select mode
-    imap <silent><expr> <Tab>
-      \ luasnip#expandable() ? '<Plug>luasnip-expand' :
-      \ luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' :
-      \ '<Tab>'
-
-    smap <silent><expr> <Tab>
-      \ luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
-
-    " Shift-Tab per saltare indietro
-    imap <silent><expr> <S-Tab>
-      \ luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
-
-    smap <silent><expr> <S-Tab>
-      \ luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
          nmap <leader>c <Plug>(vimtex-compile)
          nmap <leader>ii <Plug>(vimtex-toc-toggle)
          inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
