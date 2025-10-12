@@ -1,5 +1,5 @@
 {...}: {
-  plugins.neogit = {
+  plugins.lazygit= {
     enable = true;
   };
 }

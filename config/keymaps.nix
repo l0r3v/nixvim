@@ -42,10 +42,8 @@
   ]; #end of remap
   extraConfigVim = ''
      let maplocalleader = ","
-     imap <silent><expr> <C-K> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<C-K>'
-     smap <silent><expr> <C-K> luasn#jumpable(1) ? '<Plug>luasnip-jump-next' : '<C-K>'
-     imap <silent><expr> <C-L> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<C-L>'
-     smap <silent><expr> <C-L> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<C-L>'
+     imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+     imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
      nmap <leader>c <Plug>(vimtex-compile)
      nmap <leader>ii <Plug>(vimtex-toc-toggle)
      inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>

@@ -5,7 +5,7 @@
     ./image.nix
     ./lsp.nix
     ./lualine.nix
-    ./neogit.nix
+    ./lazygit.nix
     ./oil.nix
     ./render-markdown.nix
     ./telescope.nix
