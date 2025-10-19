@@ -27,9 +27,9 @@ in {
 
         keymap = {
           preset = "default";
-          "<Tab>" = "select_next_or_expand_snippet";
-          "<S-Tab>" = "select_prev_or_jump_back";
-          "<C-e>" = "snippet_next_choice"; # scorre tra choiceNode di luasnip
+          "<Tab>" = "select_next";
+          "<S-Tab>" = "select_prev";
+          "<C-space>" = "show";
           "<CR>" = "accept";
         };
 
