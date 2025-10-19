@@ -13,9 +13,29 @@ jobs:
   build-and-test:
     name: Build/Test
     runs-on: nixos-host
+    env:
+      NIX_CONFIG: "experimental-features = nix-command flakes"
+    strategy:
+      matrix:
+        package: [default, full]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Nix packages
-        run: nix build .#full
+      - name: Validate flake outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix flake check
+
+      - name: Build package – ${{ matrix.package }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix build .#${{ matrix.package }}
+
+      - name: Smoke test Neovim – ${{ matrix.package }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix run .#${{ matrix.package }} -- --headless '+qa'
