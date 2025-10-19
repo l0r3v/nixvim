@@ -58,6 +58,12 @@
     # ----------------
     {
       mode = "n";
+      key = "<leader>fw";
+      action = "<cmd>Telescope grep_string<CR>";
+      options.desc = "Find word under cursor";
+    }
+    {
+      mode = "n";
       key = "<leader>ff";
       action = "<cmd>Telescope find_files<CR>";
       options.desc = "Find files";
@@ -157,7 +163,6 @@
     map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
     map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
     map("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover documentation" })
-    map("n", "<leader>f", function() vim.lsp.buf.format { async = true } end, { desc = "Format buffer" })
     map("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show diagnostic info" })
     map("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
     map("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
