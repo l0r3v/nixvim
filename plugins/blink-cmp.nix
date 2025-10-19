@@ -26,11 +26,7 @@ in {
         };
 
         keymap = {
-          preset = "default";
-          "<Tab>" = "select_next";
-          "<S-Tab>" = "select_prev";
-          "<C-space>" = "show";
-          "<CR>" = "accept";
+          preset = "super-tab";
         };
 
         # Firma e snippet
