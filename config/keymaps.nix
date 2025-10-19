@@ -128,6 +128,61 @@
       action = "<Plug>(vimtex-toc-toggle)";
       options.desc = "Toggle TOC (vimtex)";
     }
+    # ----------------
+    # ✨ LuaSnip / Snippet navigation
+    # ----------------
+    {
+      mode = ["i" "s"];
+      key = "<Tab>";
+      action.__raw = ''
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+          end
+        end
+      '';
+      options = {
+        silent = true;
+        desc = "Expand or jump to next snippet placeholder";
+      };
+    }
+    {
+      mode = ["i" "s"];
+      key = "<S-Tab>";
+      action.__raw = ''
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, true, true), "n", true)
+          end
+        end
+      '';
+      options = {
+        silent = true;
+        desc = "Jump to previous snippet placeholder";
+      };
+    }
+    {
+      mode = ["i" "s"];
+      key = "<C-e>";
+      action.__raw = ''
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.choice_active() then
+            luasnip.change_choice(1)
+          end
+        end
+      '';
+      options = {
+        silent = true;
+        desc = "Change active snippet choice";
+      };
+    }
   ];
 
   extraConfigLua = ''
