@@ -44,52 +44,116 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env('tikzpicture')
 end
 
--- Generating functions for Matrix/Cases - thanks L3MON4D3!
-local generate_matrix = function(args, snip)
-	local rows = tonumber(snip.captures[2])
-	local cols = tonumber(snip.captures[3])
-	local nodes = {}
-	local ins_indx = 1
-	for j = 1, rows do
-		table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
-		ins_indx = ins_indx + 1
-		for k = 2, cols do
-			table.insert(nodes, t(" & "))
-			table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
-			ins_indx = ins_indx + 1
-		end
-		table.insert(nodes, t({ "\\\\", "" }))
-	end
-	-- fix last node.
-	nodes[#nodes] = t("\\\\")
-	return sn(nil, nodes)
+local function make_snippet(entry)
+  local snippet_opts = { trig = entry.trig, dscr = entry.dscr }
+  if entry.name then
+    snippet_opts.name = entry.name
+  end
+  if entry.snippetType then
+    snippet_opts.snippetType = entry.snippetType
+  end
+  if entry.wordTrig ~= nil then
+    snippet_opts.wordTrig = entry.wordTrig
+  end
+  if entry.regTrig ~= nil then
+    snippet_opts.regTrig = entry.regTrig
+  end
+  if entry.priority ~= nil then
+    snippet_opts.priority = entry.priority
+  end
+  if entry.hidden ~= nil then
+    snippet_opts.hidden = entry.hidden
+  end
+
+  local body
+  if entry.formatter then
+    body = entry.formatter(entry.template, entry.nodes, entry.format_opts or {})
+  else
+    body = entry.nodes
+  end
+
+  local context_opts
+  if entry.opts then
+    context_opts = {}
+    for key, value in pairs(entry.opts) do
+      context_opts[key] = value
+    end
+  end
+
+  if entry.condition then
+    context_opts = context_opts or {}
+    context_opts.condition = entry.condition
+  end
+
+  if entry.show_condition then
+    context_opts = context_opts or {}
+    context_opts.show_condition = entry.show_condition
+  end
+
+  if context_opts then
+    return s(snippet_opts, body, context_opts)
+  end
+
+  return s(snippet_opts, body)
 end
 
+-- Generating functions for Matrix/Cases - thanks L3MON4D3!
+local generate_matrix = function(args, snip)
+        local rows = tonumber(snip.captures[2])
+        local cols = tonumber(snip.captures[3])
+        local nodes = {}
+        local ins_indx = 1
+        for j = 1, rows do
+                table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
+                ins_indx = ins_indx + 1
+                for k = 2, cols do
+                        table.insert(nodes, t(" & "))
+                        table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
+                        ins_indx = ins_indx + 1
+                end
+                table.insert(nodes, t({ "\\\\", "" }))
+        end
+        -- fix last node.
+        nodes[#nodes] = t("\\\\")
+        return sn(nil, nodes)
+end
 
-
-
-
-M = {
-	s({trig = "([bBpvV])mat(%d+)x(%d+)([ar])", name = "[bBpvV]matrix", dscr = "matrices", regTrig = true, hidden = true},
-	fmta([[
+local snippet_entries = {
+  {
+    trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
+    name = "[bBpvV]matrix",
+    dscr = "Generate matrices from pattern",
+    regTrig = true,
+    hidden = true,
+    condition = tex_utils.in_mathzone,
+    show_condition = tex_utils.in_mathzone,
+    formatter = fmta,
+    template = [[
     \begin{<>}<>
-    	<>
+        <>
     \end{<>}]],
-	{f(function(_, snip)
+    nodes = {
+      f(function(_, snip)
         return snip.captures[1] .. "matrix"
-    end),
-    f(function(_, snip)
+      end),
+      f(function(_, snip)
         if snip.captures[4] == "a" then
-            out = string.rep("c", tonumber(snip.captures[3]) - 1)
+            local out = string.rep("c", tonumber(snip.captures[3]) - 1)
             return "[" .. out .. "|c]"
         end
         return ""
-    end),
-    d(1, generate_matrix),
-    f(function(_, snip)
+      end),
+      d(1, generate_matrix),
+      f(function(_, snip)
         return snip.captures[1] .. "matrix"
-    end)
-    }),
-    	{ condition = tex_utils.in_mathzone, show_condition = tex_utils.in_mathzone }),
+      end),
+    },
+  },
 }
-return M
+
+local snippets = {}
+for _, entry in ipairs(snippet_entries) do
+  table.insert(snippets, make_snippet(entry))
+end
+
+return snippets

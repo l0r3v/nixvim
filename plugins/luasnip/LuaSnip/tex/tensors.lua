@@ -43,40 +43,164 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env('tikzpicture')
 end
 
-return {
+local function make_snippet(entry)
+  local snippet_opts = { trig = entry.trig, dscr = entry.dscr }
+  if entry.name then
+    snippet_opts.name = entry.name
+  end
+  if entry.snippetType then
+    snippet_opts.snippetType = entry.snippetType
+  end
+  if entry.wordTrig ~= nil then
+    snippet_opts.wordTrig = entry.wordTrig
+  end
+  if entry.regTrig ~= nil then
+    snippet_opts.regTrig = entry.regTrig
+  end
+  if entry.priority ~= nil then
+    snippet_opts.priority = entry.priority
+  end
+  if entry.hidden ~= nil then
+    snippet_opts.hidden = entry.hidden
+  end
 
-	s({trig="ux",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{u_x}"),}
-	),
-	s({trig="uy",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{u_y}"),}
-	),
-	s({trig="uz",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{u_z}"),}
-	),
-	s({trig="ui",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{u_i}"),}
-	),
-	s({trig="uj",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{u_j}"),}
-	),
-	s({trig="xi",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{x_i}"),}
-	),
-	s({trig="xj",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("{x_j}"),}
-	),
+  local body
+  if entry.formatter then
+    body = entry.formatter(entry.template, entry.nodes, entry.format_opts or {})
+  else
+    body = entry.nodes
+  end
 
-	s({trig="tij",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("\\tau_{ij}"),}
-	),
-	s({trig="dij",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("\\delta_{ij}"),}
-	),
-	s({trig="sij",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("\\sigma_{ij}"),}
-	),
-	s({trig="eijk",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	 {t("\\varepsilon_{ijk}"),}
-	),
+  local context_opts
+  if entry.opts then
+    context_opts = {}
+    for key, value in pairs(entry.opts) do
+      context_opts[key] = value
+    end
+  end
+
+  if entry.condition then
+    context_opts = context_opts or {}
+    context_opts.condition = entry.condition
+  end
+
+  if entry.show_condition then
+    context_opts = context_opts or {}
+    context_opts.show_condition = entry.show_condition
+  end
+
+  if context_opts then
+    return s(snippet_opts, body, context_opts)
+  end
+
+  return s(snippet_opts, body)
+end
+
+local snippet_entries = {
+  {
+    trig = "ux",
+    dscr = "Insert u sub x",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{u_x}"),
+    },
+  },
+  {
+    trig = "uy",
+    dscr = "Insert u sub y",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{u_y}"),
+    },
+  },
+  {
+    trig = "uz",
+    dscr = "Insert u sub z",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{u_z}"),
+    },
+  },
+  {
+    trig = "ui",
+    dscr = "Insert u sub i",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{u_i}"),
+    },
+  },
+  {
+    trig = "uj",
+    dscr = "Insert u sub j",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{u_j}"),
+    },
+  },
+  {
+    trig = "xi",
+    dscr = "Insert x sub i",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{x_i}"),
+    },
+  },
+  {
+    trig = "xj",
+    dscr = "Insert x sub j",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{x_j}"),
+    },
+  },
+  {
+    trig = "tij",
+    dscr = "Insert tau_{ij}",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\\tau_{ij}"),
+    },
+  },
+  {
+    trig = "dij",
+    dscr = "Insert delta_{ij}",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\\delta_{ij}"),
+    },
+  },
+  {
+    trig = "sij",
+    dscr = "Insert sigma_{ij}",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\\sigma_{ij}"),
+    },
+  },
+  {
+    trig = "eijk",
+    dscr = "Insert varepsilon_{ijk}",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\\varepsilon_{ijk}"),
+    },
+  },
 }
+
+local snippets = {}
+for _, entry in ipairs(snippet_entries) do
+  table.insert(snippets, make_snippet(entry))
+end
+
+return snippets
