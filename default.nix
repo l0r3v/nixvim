@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   mode ? "bare",
   ...

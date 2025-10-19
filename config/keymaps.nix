@@ -41,12 +41,12 @@
     }
   ]; #end of remap
   extraConfigVim = ''
-         let maplocalleader = ","
-         nmap <leader>c <Plug>(vimtex-compile)
-         nmap <leader>ii <Plug>(vimtex-toc-toggle)
-         inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
-         nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
-         nnoremap <silent> <leader>lg :LazyGit<CR>
+    let maplocalleader = ","
+    nmap <leader>c <Plug>(vimtex-compile)
+    nmap <leader>ii <Plug>(vimtex-toc-toggle)
+    inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+    nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+    nnoremap <silent> <leader>lg :LazyGit<CR>
   '';
   extraConfigLua = ''
           local tlsc = require('telescope.builtin')
