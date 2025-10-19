@@ -50,9 +50,9 @@ return {
 		{ trig = "defb", dscr = "definitionbox environment" },
 		fmta(
 			[[
-\begin{{definitionbox}}
-  {<>}
-\end{{definitionbox}}
+\begin{definitionbox}
+  <>
+\end{definitionbox}
 ]],
 			{ i(1, "Definizione...") }
 		)
@@ -63,9 +63,9 @@ return {
 		{ trig = "exb", dscr = "examplebox environment" },
 		fmta(
 			[[
-\begin{{examplebox}}
-  {<>}
-\end{{examplebox}}
+\begin{examplebox}
+  <>
+\end{examplebox}
 ]],
 			{ i(1, "Esempio...") }
 		)
@@ -76,9 +76,9 @@ return {
 		{ trig = "todob", dscr = "todobox environment" },
 		fmta(
 			[[
-\begin{{todobox}}
-  {<>}
-\end{{todobox}}
+\begin{todobox}
+  <>
+\end{todobox}
 ]],
 			{ i(1, "TODO: ...") }
 		)
