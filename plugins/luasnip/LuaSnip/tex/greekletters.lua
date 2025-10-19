@@ -43,121 +43,259 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env('tikzpicture')
 end
 
-return {
-	-- Snippet
-	s({
-		trig = "@a",
-		dscr = "Alpha Greek Letter",
-		regTrig=false,
-		priority=100,
-		snippetType="autosnippet",
-		condition=tex_utils.in_mathzone
+local function make_snippet(entry)
+  local snippet_opts = { trig = entry.trig, dscr = entry.dscr }
+  if entry.name then
+    snippet_opts.name = entry.name
+  end
+  if entry.snippetType then
+    snippet_opts.snippetType = entry.snippetType
+  end
+  if entry.wordTrig ~= nil then
+    snippet_opts.wordTrig = entry.wordTrig
+  end
+  if entry.regTrig ~= nil then
+    snippet_opts.regTrig = entry.regTrig
+  end
+  if entry.priority ~= nil then
+    snippet_opts.priority = entry.priority
+  end
+  if entry.hidden ~= nil then
+    snippet_opts.hidden = entry.hidden
+  end
 
-	},
-	{
-		t("{\\alpha}"),
-	}
-	),
+  local body
+  if entry.formatter then
+    body = entry.formatter(entry.template, entry.nodes, entry.format_opts or {})
+  else
+    body = entry.nodes
+  end
 
-	-- Snippet
-	s({trig="@b",desc="insert beta",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\beta}"),}
-	),
+  local context_opts
+  if entry.opts then
+    context_opts = {}
+    for key, value in pairs(entry.opts) do
+      context_opts[key] = value
+    end
+  end
 
-	-- Snippet
-	s({trig="@q",desc="theta",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\theta}"),}
-	),
+  if entry.condition then
+    context_opts = context_opts or {}
+    context_opts.condition = entry.condition
+  end
 
-	-- Snippet
-	s({trig="@g",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\gamma}"),}
-	),
+  if entry.show_condition then
+    context_opts = context_opts or {}
+    context_opts.show_condition = entry.show_condition
+  end
 
-	-- Snippet
-	s({trig="@G",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\Gamma}"),}
-	),
+  if context_opts then
+    return s(snippet_opts, body, context_opts)
+  end
 
-	-- Snippet
-	s({trig="@s",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\sigma}"),}
-	),
+  return s(snippet_opts, body)
+end
 
-	s({trig="@S",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\Sigma}"),}
-	),
+local snippet_entries = {
+  {
+    trig = "@a",
+    dscr = "Insert lowercase alpha",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    priority = 100,
+    regTrig = false,
+    nodes = {
+      t("{\\alpha}"),
+    },
+  },
+  {
+    trig = "@b",
+    dscr = "Insert lowercase beta",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\beta}"),
+    },
+  },
+  {
+    trig = "@q",
+    dscr = "Insert lowercase theta",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\theta}"),
+    },
+  },
+  {
+    trig = "@g",
+    dscr = "Insert lowercase gamma",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\gamma}"),
+    },
+  },
+  {
+    trig = "@G",
+    dscr = "Insert uppercase Gamma",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\Gamma}"),
+    },
+  },
+  {
+    trig = "@s",
+    dscr = "Insert lowercase sigma",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\sigma}"),
+    },
+  },
+  {
+    trig = "@S",
+    dscr = "Insert uppercase Sigma",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\Sigma}"),
+    },
+  },
+  {
+    trig = "@p",
+    dscr = "Insert lowercase pi",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\pi}"),
+    },
+  },
+  {
+    trig = "@P",
+    dscr = "Insert uppercase Pi",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\Pi}"),
+    },
+  },
+  {
+    trig = "@h",
+    dscr = "Insert lowercase eta",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\eta}"),
+    },
+  },
+  {
+    trig = "@r",
+    dscr = "Insert lowercase rho",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\rho}"),
+    },
+  },
+  {
+    trig = "@D",
+    dscr = "Insert uppercase Delta",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\Delta}"),
+    },
+  },
+  {
+    trig = "@d",
+    dscr = "Insert lowercase delta",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\delta}"),
+    },
+  },
+  {
+    trig = "@t",
+    dscr = "Insert lowercase tau",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\tau}"),
+    },
+  },
+  {
+    trig = "@v",
+    dscr = "Insert lowercase nu",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\nu}"),
+    },
+  },
+  {
+    trig = "@w",
+    dscr = "Insert lowercase psi",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\psi}"),
+    },
+  },
+  {
+    trig = "@o",
+    dscr = "Insert lowercase omega",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\omega}"),
+    },
+  },
+  {
+    trig = "@O",
+    dscr = "Insert uppercase Omega",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\Omega}"),
+    },
+  },
+  {
+    trig = "@e",
+    dscr = "Insert lowercase varepsilon",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\varepsilon}"),
+    },
+  },
+  {
+    trig = "@f",
+    dscr = "Insert lowercase phi",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\phi}"),
+    },
+  },
+  {
+    trig = "@x",
+    dscr = "Insert lowercase xi",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("{\\xi}"),
+    },
+  },
+}
 
-	-- Snippet
-	s({trig="@p",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\pi}"),}
-	),
-	-- Snippet
-	s({trig="@P",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\Pi}"),}
-	),
+local snippets = {}
+for _, entry in ipairs(snippet_entries) do
+  table.insert(snippets, make_snippet(entry))
+end
 
-	-- Snippet
-	s({trig="@h",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\eta}"),}
-	),
-
-	-- Snippet
-	s({trig="@r",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\rho}"),}
-	),
-
-	-- Snippet
-	s({trig="@D",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\Delta}"),}
-	),
-
-	-- Snippet
-	s({trig="@d",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\delta}"),}
-	),
-
-	-- Snippet
-	s({trig="@t",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\tau}"),}
-	),
-
-	-- Snippet
-	s({trig="@v",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\nu}"),}
-	),
-
-	-- Snippet
-	s({trig="@w",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\psi}"),}
-	),
-
-	-- Snippet
-	s({trig="@o",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\omega}"),}
-	),
-
-	-- Snippet
-	s({trig="@O",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\Omega}"),}
-	),
-
-	-- Snippet
-	s({trig="@e",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\varepsilon}"),}
-	),
-
-	-- Snippet
-	s({trig="@f",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\phi}"),}
-	),
-
-	-- Snippet
-	s({trig="@x",snippetType="autosnippet",condition=tex_utils.in_mathzone},
-	{t("{\\xi}"),}
-	),
-
-	-- Snippet
+return snippets
 	s({trig="@c",snippetType="autosnippet",condition=tex_utils.in_mathzone},
 	{t("{\\chi}"),}
 	),

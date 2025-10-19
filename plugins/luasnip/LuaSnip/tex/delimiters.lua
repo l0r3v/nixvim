@@ -44,21 +44,87 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env('tikzpicture')
 end
 
-return {
+local function make_snippet(entry)
+  local snippet_opts = { trig = entry.trig, dscr = entry.dscr }
+  if entry.name then
+    snippet_opts.name = entry.name
+  end
+  if entry.snippetType then
+    snippet_opts.snippetType = entry.snippetType
+  end
+  if entry.wordTrig ~= nil then
+    snippet_opts.wordTrig = entry.wordTrig
+  end
+  if entry.regTrig ~= nil then
+    snippet_opts.regTrig = entry.regTrig
+  end
+  if entry.priority ~= nil then
+    snippet_opts.priority = entry.priority
+  end
+  if entry.hidden ~= nil then
+    snippet_opts.hidden = entry.hidden
+  end
 
-	s({trig="(",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	fmta( "\\left( <> \\right)",
-	{
-		i(1),
-	}
-	)
-	),
+  local body
+  if entry.formatter then
+    body = entry.formatter(entry.template, entry.nodes, entry.format_opts or {})
+  else
+    body = entry.nodes
+  end
 
-	s({trig="[",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	fmta( "\\left[ <> \\right]",
-	{
-		i(1),
-	}
-	)
-	),
+  local context_opts
+  if entry.opts then
+    context_opts = {}
+    for key, value in pairs(entry.opts) do
+      context_opts[key] = value
+    end
+  end
+
+  if entry.condition then
+    context_opts = context_opts or {}
+    context_opts.condition = entry.condition
+  end
+
+  if entry.show_condition then
+    context_opts = context_opts or {}
+    context_opts.show_condition = entry.show_condition
+  end
+
+  if context_opts then
+    return s(snippet_opts, body, context_opts)
+  end
+
+  return s(snippet_opts, body)
+end
+
+local snippet_entries = {
+  {
+    trig = "(",
+    dscr = "Wrap content with \left( and \right)",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    formatter = fmta,
+    template = "\\left( <> \\right)",
+    nodes = {
+      i(1),
+    },
+  },
+  {
+    trig = "[",
+    dscr = "Wrap content with \left[ and \right]",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    formatter = fmta,
+    template = "\\left[ <> \\right]",
+    nodes = {
+      i(1),
+    },
+  },
 }
+
+local snippets = {}
+for _, entry in ipairs(snippet_entries) do
+  table.insert(snippets, make_snippet(entry))
+end
+
+return snippets

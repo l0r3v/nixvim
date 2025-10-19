@@ -43,257 +43,325 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env('tikzpicture')
 end
 
-return {
-    	s({trig="sii", snippetType="autosnippet"},
-      	fmta(
-        	[[\si{<>}]],
-        	{
-        	  i(1),
-        	}
-      )
-    ),
-    s({trig="SI"},
-      fmta(
-        [[\SI{<>}{<>}]],
-        {
-          i(1),
-          i(2)
-        }
-      )
-    ),
-    s({trig="udd"},
-      fmta(
-        [[\underline{<>}]],
-        {
-          d(1, get_visual),
-        }
-      )
-    ),
-    -- VSPACE
-    s({trig="vs"},
-      fmta(
-        [[\vspace{<>}]],
-        {
-          d(1, get_visual),
-        }
-      )
-    ),
-    -- SECTION
-    s({trig="h1", snippetType="autosnippet"},
-      fmta(
-        [[\section{<>}
-        <>]],
-        {
-          d(1, get_visual),
-          i(2)
-        }
-      )
-    ),
-    -- SUBSECTION
-    s({trig="h2", snippetType="autosnippet"},
-      fmta(
-        [[\subsection{<>}
-        <>]],
-        {
-          d(1, get_visual),
-          i(2)
-        }
-      )
-    ),
-    -- SUBSUBSECTION
-    s({trig="h3", snippetType="autosnippet"},
-      fmta(
-        [[\subsubsection{<>}
-        <>]],
-        {
-          d(1, get_visual),
-          i(2)
-        }
-      )
-    ),
-	-- Forall
-	s({trig= "pogn",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	{t("\\forall"),}
-	),
-	-- norm
-    	s({trig="norm", snippetType="autosnippet",condition = tex_utils.in_mathzone},
-     	 fmta(
-           [[||<>||]],
-           {
-	     d(1, get_visual),
-     	   }
-	   )
-	),
-	-- checkamrk
-	s({trig= "check",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	{t("\\checkmark"),}
-	),
-	-- sim
-	s({trig="~",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	{t("\\sim"),}
-	),
+local function make_snippet(entry)
+  local snippet_opts = { trig = entry.trig, dscr = entry.dscr }
+  if entry.name then
+    snippet_opts.name = entry.name
+  end
+  if entry.snippetType then
+    snippet_opts.snippetType = entry.snippetType
+  end
+  if entry.wordTrig ~= nil then
+    snippet_opts.wordTrig = entry.wordTrig
+  end
+  if entry.regTrig ~= nil then
+    snippet_opts.regTrig = entry.regTrig
+  end
+  if entry.priority ~= nil then
+    snippet_opts.priority = entry.priority
+  end
+  if entry.hidden ~= nil then
+    snippet_opts.hidden = entry.hidden
+  end
 
-	-- costante
-	s({trig="cst",snippetType="autosnippet",condition = tex_utils.in_mathzone},
-	{t("\\costante"),}
-	),
+  local body
+  if entry.formatter then
+    body = entry.formatter(entry.template, entry.nodes, entry.format_opts or {})
+  else
+    body = entry.nodes
+  end
 
-	-- squareroot
-	s({trig="sr",snippetType="autosnippet"},
-	{t("^2"),}
-	),
+  local context_opts
+  if entry.opts then
+    context_opts = {}
+    for key, value in pairs(entry.opts) do
+      context_opts[key] = value
+    end
+  end
 
-	-- Snippet
-	s({trig="@8",snippetType="autosnippet",condtion=tex_utils.in_mathzone},
-	{t("\\infty"),}
-	),
+  if entry.condition then
+    context_opts = context_opts or {}
+    context_opts.condition = entry.condition
+  end
 
-	-- Snippet
-	s({trig="ittt",snippetType="autosnippet",condtion=tex_utils.in_itemize},
-	{t("\\item"),}
-	),
+  if entry.show_condition then
+    context_opts = context_opts or {}
+    context_opts.show_condition = entry.show_condition
+  end
 
-	-- Snippet
-	s({trig="benum", dscr="A LaTeX enumerate environment",snippetType="autosnippet"},
-	fmt(
-	[[
-	\begin{enumerate}
-		\item <>
-	\end{enumerate}
-	]],
-	-- The insert node is placed in the <> angle brackets
-	{ i(1) },
-	-- This is where I specify that angle brackets are used as node positions.
-	{ delimiters = "<>" }
-	)
-	),
-	-- Snippet
-	s({trig="bitem", dscr="A LaTeX itemize environment",snippetType="autosnippet"},
-	fmt(
-	[[
-	\begin{itemize}
-		\item <>
-	\end{itemize}
-	]],
-	-- The insert node is placed in the <> angle brackets
-	{ i(1) },
-	-- This is where I specify that angle brackets are used as node positions.
-	{ delimiters = "<>" }
-	)
-	),
+  if context_opts then
+    return s(snippet_opts, body, context_opts)
+  end
 
-	-- Snippet
-	s({trig="beq", dscr="A LaTeX equation environment",snippetType="autosnippet"},
-	fmt( -- The snippet code actually looks like the equation environment it produces.
-	[[
-	\begin{equation}
-	  <>
-	\end{equation}
-	]],
-	-- The insert node is placed in the <> angle brackets
-	{ i(1) },
-	-- This is where I specify that angle brackets are used as node positions.
-	{ delimiters = "<>" }
-	)
-	),
+  return s(snippet_opts, body)
+end
 
-	-- Snippet
-	s({trig="gt", snippetType="autosnippet"},
-	fmta(
-	[[
-	\begin{gather*}
-	  <>
-	\end{gather*}
-	]],
-	{
-		i(1),
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig="env", snippetType="autosnippet"},
-	fmta(
-	[[
-	\begin{<>}
-	  <>
-	\end{<>}
-	]],
-	{
-		i(1),
-		i(2),
-		rep(1),  -- this node repeats insert node i(1)
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig = "tbb", dscr = "Expands 'tbb' into LaTeX's textbf{} command.",snippetType="autosnippet"},
-	fmta("\\textbf{<>}",
-	{
-		d(1, get_visual),
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig = "tii", dscr = "Expands 'tii' into LaTeX's textit{} command.",snippetType="autosnippet"},
-	fmta("\\textit{<>}",
-	{
-		d(1, get_visual),
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig = "enf", dscr = "Expands 'enf' into LaTeX's emph{} command.",snippetType="autosnippet"},
-	fmta("\\emph{<>}",
-	{
-		d(1, get_visual),
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig= "mk",snippetType="autosnippet"},
-	fmta("$ <> $ ",
-	{
-		i(1)
-	}
-	)
-	),
-
-	-- Snippet
-	s({trig= "dm",snippetType="autosnippet"},
-	fmta(
-	[[
-	\[
-	  <>
-	\]
-	]]
-	,
-	{
-		i(1)
-	}
-	),
-        {condition = line_begin}
-	),
-
-
-	-- Snippet
-	s({trig="new", dscr="A generic new environmennt"},
-	fmta(
-	[[
-	\begin{<>}
-	  <>
-	\end{<>}
-	]],
-	{
-		i(1),
-		i(2),
-		rep(1),
-	}
-	),
-	{condition = line_begin}
-	),
+local snippet_entries = {
+  {
+    trig = "sii",
+    dscr = "Insert a si{} command",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\si{<>}",
+    nodes = {
+      i(1),
+    },
+  },
+  {
+    trig = "SI",
+    dscr = "Insert an SI value with units",
+    formatter = fmta,
+    template = "\SI{<>}{<>}",
+    nodes = {
+      i(1),
+      i(2),
+    },
+  },
+  {
+    trig = "udd",
+    dscr = "Underline selected text",
+    formatter = fmta,
+    template = "\underline{<>}",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "vs",
+    dscr = "Insert a vspace command",
+    formatter = fmta,
+    template = "\vspace{<>}",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "h1",
+    dscr = "Create a section heading",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\section{<>}\n<>",
+    nodes = {
+      d(1, get_visual),
+      i(2),
+    },
+  },
+  {
+    trig = "h2",
+    dscr = "Create a subsection heading",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\subsection{<>}\n<>",
+    nodes = {
+      d(1, get_visual),
+      i(2),
+    },
+  },
+  {
+    trig = "h3",
+    dscr = "Create a subsubsection heading",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\subsubsection{<>}\n<>",
+    nodes = {
+      d(1, get_visual),
+      i(2),
+    },
+  },
+  {
+    trig = "pogn",
+    dscr = "Insert the universal quantifier",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\forall"),
+    },
+  },
+  {
+    trig = "norm",
+    dscr = "Create a norm with visual content",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    formatter = fmta,
+    template = "||<>||",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "check",
+    dscr = "Insert a checkmark symbol",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\checkmark"),
+    },
+  },
+  {
+    trig = "~",
+    dscr = "Insert a similarity symbol",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\sim"),
+    },
+  },
+  {
+    trig = "cst",
+    dscr = "Insert the custom costante macro",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\costante"),
+    },
+  },
+  {
+    trig = "sr",
+    dscr = "Append a squared exponent",
+    snippetType = "autosnippet",
+    nodes = {
+      t("^2"),
+    },
+  },
+  {
+    trig = "@8",
+    dscr = "Insert the infinity symbol",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_mathzone,
+    nodes = {
+      t("\infty"),
+    },
+  },
+  {
+    trig = "ittt",
+    dscr = "Insert a new item in itemize",
+    snippetType = "autosnippet",
+    condition = tex_utils.in_itemize,
+    nodes = {
+      t("\item"),
+    },
+  },
+  {
+    trig = "benum",
+    dscr = "A LaTeX enumerate environment",
+    snippetType = "autosnippet",
+    formatter = fmt,
+    template = "\begin{enumerate}\n        \item <>\n\end{enumerate}",
+    nodes = {
+      i(1),
+    },
+    format_opts = { delimiters = "<>" },
+  },
+  {
+    trig = "bitem",
+    dscr = "A LaTeX itemize environment",
+    snippetType = "autosnippet",
+    formatter = fmt,
+    template = "\begin{itemize}\n        \item <>\n\end{itemize}",
+    nodes = {
+      i(1),
+    },
+    format_opts = { delimiters = "<>" },
+  },
+  {
+    trig = "beq",
+    dscr = "A LaTeX equation environment",
+    snippetType = "autosnippet",
+    formatter = fmt,
+    template = "\begin{equation}\n  <>\n\end{equation}",
+    nodes = {
+      i(1),
+    },
+    format_opts = { delimiters = "<>" },
+  },
+  {
+    trig = "gt",
+    dscr = "A gather* environment",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\begin{gather*}\n  <>\n\end{gather*}",
+    nodes = {
+      i(1),
+    },
+  },
+  {
+    trig = "env",
+    dscr = "A generic environment with repetition",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\begin{<>}\n  <>\n\end{<>}",
+    nodes = {
+      i(1),
+      i(2),
+      rep(1),
+    },
+  },
+  {
+    trig = "tbb",
+    dscr = "Expands 'tbb' into LaTeX's textbf{} command.",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\textbf{<>}",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "tii",
+    dscr = "Expands 'tii' into LaTeX's textit{} command.",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\textit{<>}",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "enf",
+    dscr = "Expands 'enf' into LaTeX's emph{} command.",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\emph{<>}",
+    nodes = {
+      d(1, get_visual),
+    },
+  },
+  {
+    trig = "mk",
+    dscr = "Inline math delimiters",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "$ <> $ ",
+    nodes = {
+      i(1),
+    },
+  },
+  {
+    trig = "dm",
+    dscr = "Display math environment",
+    snippetType = "autosnippet",
+    formatter = fmta,
+    template = "\[\n  <>\n\]",
+    nodes = {
+      i(1),
+    },
+  },
+  {
+    trig = "new",
+    dscr = "A generic new environment",
+    formatter = fmta,
+    template = "\begin{<>}\n  <>\n\end{<>}",
+    nodes = {
+      i(1),
+      i(2),
+      rep(1),
+    },
+  },
 }
+
+local snippets = {}
+for _, entry in ipairs(snippet_entries) do
+  table.insert(snippets, make_snippet(entry))
+end
+
+return snippets
