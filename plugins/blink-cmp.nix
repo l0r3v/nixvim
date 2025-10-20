@@ -26,7 +26,7 @@ in {
         };
 
         keymap = {
-          preset = "super-tab";
+          preset = "enter";
         };
 
         # Firma e snippet

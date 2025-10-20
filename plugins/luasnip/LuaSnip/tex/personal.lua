@@ -44,7 +44,13 @@ tex_utils.in_tikz = function() -- TikZ picture environment detection
 end
 
 return {
-
+	s(
+		{ trig = "fn", name = "footnote", dscr = "Footnote with optional visual text" },
+		fmta("\\footnote{<>}", {
+			d(1, get_visual),
+		}),
+		{ condition = tex_utils.in_text }
+	),
 	-- Snippet per definizione box: \begin{definitionbox} ... \end{definitionbox}
 	s(
 		{ trig = "defb", dscr = "definitionbox environment" },
