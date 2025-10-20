@@ -15,6 +15,13 @@
       transparent
       cleveref
       ifmtarg
+      l3packages
+      tcolorbox
+      adjustbox
+      physics
+      tikzfill
+      pdfcol
+      listingsutf8
       ;
   };
 in {
