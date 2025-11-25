@@ -11,6 +11,7 @@ in {
       enable = true;
       inlayHints = true;
       servers = {
+        gdscript.enable = true;
         ts_ls.enable = true;
         lua_ls.enable = true;
         texlab.enable = true;
@@ -43,10 +44,4 @@ in {
       };
     };
   };
-  # extraConfigLua = ''
-  #   require("lspconfig")["gdscript"].setup({
-  #   	name = "godot",
-  #   	cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
-  #   })
-  # '';
 }
