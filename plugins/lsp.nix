@@ -11,7 +11,10 @@ in {
       enable = true;
       inlayHints = true;
       servers = {
-        gdscript.enable = true;
+        gdscript = {
+          enable = true;
+          package = null;
+        };
         ts_ls.enable = true;
         lua_ls.enable = true;
         texlab.enable = true;

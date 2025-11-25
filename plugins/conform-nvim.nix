@@ -6,6 +6,7 @@
     rustfmt # Rust
     nodePackages.prettier # JS / TS / JSON / Markdown / YAML
     black # Python
+    gdtoolkit_4 # GDscript
   ];
   plugins.conform-nvim = {
     enable = true;
@@ -22,6 +23,7 @@
         yaml = ["prettier"];
         markdown = ["prettier"];
         python = ["black"];
+        gdscript = ["gdformat"];
       };
 
       format_on_save = {
