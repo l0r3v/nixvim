@@ -1,11 +1,12 @@
 {...}: {
   imports = [
-    ./vimtex.nix
-    ./luasnip/luasnip.nix
+    ./blink-cmp.nix
     ./conform-nvim.nix
     ./gitsigns.nix
-    ./which-key.nix
+    ./luasnip/luasnip.nix
+    ./octave.nix
     ./trouble.nix
-    ./blink-cmp.nix
+    ./vimtex.nix
+    ./which-key.nix
   ];
 }
