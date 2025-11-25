@@ -6,7 +6,7 @@
         owner = "gnu-octave";
         repo = "vim-octave";
         rev = "61268df";
-        hash = "sha256-+ru34zasfJCJOS0z38RnqE2wMGeLfw2GIB/guy1RmAU=";
+        hash = "sha256-HfcmlQPMwef4fnBMV4rgt/tASlfTXJr82uG1fcNSINw=";
       };
     })
   ];
