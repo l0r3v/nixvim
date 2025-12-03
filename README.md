@@ -2,11 +2,6 @@
 
 This is my personal configuration for [Nixvim](https://github.com/nixvim/nixvim), a Neovim configuration built using Nix.
 
-## Features
-
-- Modular and easily extendable configuration.
-- Configuration management with Nix for a declarative approach.
-
 ## Installation
 
 As it is a standalone module, you can try it using:
@@ -49,23 +44,5 @@ Note: If you want to install the full package you just have to substitute "defau
 ```nix
     nixvim-package = inputs.nixvim.packages.${system}.full;
 ```
-### Installed packages 
-
-- **luasnip**
-- **autoclose**
-- **blink-cmp**
-- **dap**
-- **helpview**
-- **image**
-- **lsp**
-- **lualine**
-- **oil**
-- **render-markdown**
-- **telescope**
-- **treesitter**
-- **vimtex**
-- **web-devicons**
-
-## Contributing
 
 If you want to contribute to this configuration, feel free to fork it and submit a pull request. Any improvements or suggestions are welcome!
