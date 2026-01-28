@@ -3,6 +3,7 @@
     enable = true;
     settings = {
       legacy_commands = false;
+      ui.enable = false;
       completion = {
         min_chars = 2;
         blink = true;

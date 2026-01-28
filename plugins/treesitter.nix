@@ -9,7 +9,7 @@
           disable = ["latex"];
         };
         indent.enable = true;
-        auto_install = false;
+        auto_install = true;
         incremental_selection = {
           enable = true;
           keymaps = {
