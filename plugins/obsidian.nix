@@ -1,6 +1,6 @@
 {...}: {
   plugins.obsidian = {
-    enable = true;
+    enable = false;
     settings = {
       legacy_commands = false;
       ui.enable = false;

@@ -1,10 +1,21 @@
-{ pkgs, ... }: {
-  extraPackages = [
-    pkgs.python3Packages.pylatexenc
-  ];
+{...}: {
   plugins.render-markdown = {
     enable = true;
     settings = {
+      win_options = {
+        concealcursor = {
+          default = {
+            __raw = "vim.api.nvim_get_option_value('concealcursor', {})";
+          };
+          rendered = "";
+        };
+        conceallevel = {
+          default = {
+            __raw = "vim.api.nvim_get_option_value('conceallevel', {})";
+          };
+          rendered = 3;
+        };
+      };
       enabled = true;
       bullet = {
         icons = [
@@ -36,10 +47,6 @@
         position = "inline";
         sign = false;
         width = "full";
-      };
-      latex = {
-        enabled = true;
-        position = "center";
       };
       render_modes = true;
     };

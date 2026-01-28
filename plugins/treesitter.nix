@@ -1,41 +1,20 @@
-{ pkgs, ... }: {
+{...}: {
   plugins = {
     treesitter = {
       enable = true;
       nixvimInjections = true;
-      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-        markdown
-        markdown_inline
-        latex
-        lua
-        vim
-        vimdoc
-        query
-        python
-        rust
-        nix
-        bash
-        c
-        cpp
-      ];
       settings = {
+        ensure_installed = [
+          "markdown"
+          "markdown_inline"
+          "latex"
+        ];
         highlight = {
           enable = true;
-          disable = {
-            __raw = ''
-              function(lang, buf)
-                if lang == "latex" then
-                  local ok, ft = pcall(vim.api.nvim_get_option_value, "filetype", { buf = buf })
-                  if ok and ft == "tex" then
-                    return true
-                  end
-                end
-                return false
-              end
-            '';
-          };
+          disable = ["latex"];
         };
         indent.enable = true;
+        auto_install = true;
         incremental_selection = {
           enable = true;
           keymaps = {
