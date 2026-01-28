@@ -8,6 +8,6 @@ jobs:
   update-flakes:
     runs-on: ubuntu-latest
     steps:
-    - uses: Comamoca/flakes-updater@2
+    - uses: Comamoca/flakes-updater@v2
       with:
           token: ${{ secrets.GITHUB_TOKEN }}
