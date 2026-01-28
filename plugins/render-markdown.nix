@@ -1,4 +1,7 @@
-{...}: {
+{ pkgs, ... }: {
+  extraPackages = [
+    pkgs.python3Packages.pylatexenc
+  ];
   plugins.render-markdown = {
     enable = true;
     settings = {
@@ -47,6 +50,10 @@
         position = "inline";
         sign = false;
         width = "full";
+      };
+      latex = {
+        enabled = true;
+        position = "center";
       };
       render_modes = true;
     };
