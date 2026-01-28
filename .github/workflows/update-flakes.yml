@@ -1,0 +1,13 @@
+name: Update Flakes on Sunday
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+
+jobs:
+  update-flakes:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: Comamoca/flakes-updater@2
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
