@@ -7,25 +7,26 @@ This is my personal configuration for [Nixvim](https://github.com/nixvim/nixvim)
 As it is a standalone module, you can try it using:
 
 ```bash
-    nix run github:Iorev/nixvim-config
+    nix run github:l0r3v/nixvim
 ```
 
 To install it, you can add it to your flake inputs:
 
 ```nix
     nixvim = {
-      url = "github:Iorev/nixvim-config";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:l0r3v/nixvim";
     };
 ```
-There are two different packages in the flake, "default" (or "bare") and "full". The only difference is in the luasnip, vimtex and cmp plugins. 
-Basically I am using the "bare" package for my homelab and full for my laptop. The default is "bare", so to access the "full" package you have to write:
+
+There are two different packages in the flake, "default" (or "bare") and "full". The only difference is in the luasnip, vimtex and cmp plugins.
+Basically I am using the "bare" package for my homelab and full for everything else. I have no need for my homelab to have the tex plugins. The default is "bare", so to access the "full" package you have to write:
 
 ```bash
-    nix run github:Iorev/nixvim-config#full
+    nix run github:l0r3v/nixvim#full
 ```
 
 #### Bonus
+
 My Nixvim configuration does not come with a pre-installed theme. This is because I manage everything with Stylix, which supports Nixvim.
 In my `home.nix` I have:
 
@@ -44,5 +45,3 @@ Note: If you want to install the full package you just have to substitute "defau
 ```nix
     nixvim-package = inputs.nixvim.packages.${system}.full;
 ```
-
-If you want to contribute to this configuration, feel free to fork it and submit a pull request. Any improvements or suggestions are welcome!
