@@ -7,6 +7,5 @@
     ./trouble.nix
     ./vimtex.nix
     ./which-key.nix
-    ./obsidian.nix
   ];
 }
