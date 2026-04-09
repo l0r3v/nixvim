@@ -4,7 +4,6 @@
     stylua # Lua
     clang-tools # C/C++
     rustfmt # Rust
-    nodePackages.prettier # JS / TS / JSON / Markdown / YAML
     black # Python
     gdtoolkit_4 # GDscript
   ];
