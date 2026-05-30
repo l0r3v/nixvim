@@ -4,7 +4,6 @@
     ./helpview.nix
     ./image.nix
     ./lsp.nix
-    ./lualine.nix
     ./lazygit.nix
     ./oil.nix
     ./render-markdown.nix

@@ -2,14 +2,25 @@
   opts = {
     updatetime = 100;
 
-    number = true; # show line numbers
+    number = true;
+    relativenumber = true;
 
-    relativenumber = true; # relative line numbers
-
-    shiftwidth = 2; #tab width
-    clipboard = "unnamedplus";
+    tabstop = 2;
+    shiftwidth = 2;
     expandtab = true;
     smartindent = true;
+
+    signcolumn = "yes";
+    splitright = true;
+    splitbelow = true;
+    scrolloff = 8;
+    sidescrolloff = 8;
+
+    ignorecase = true;
+    smartcase = true;
+    cursorline = true;
+
+    clipboard = "unnamedplus";
     swapfile = false;
     undofile = true;
     conceallevel = 2;

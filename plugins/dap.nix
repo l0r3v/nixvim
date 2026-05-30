@@ -41,5 +41,16 @@
     		end,
     	},
     }
+
+    local map = vim.keymap.set
+    local dopts = { noremap = true, silent = true }
+    map("n", "<leader>dc", "<cmd>lua require('dap').continue()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Continue" }))
+    map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Toggle breakpoint" }))
+    map("n", "<leader>dB", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Condition: '))<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Conditional breakpoint" }))
+    map("n", "<leader>di", "<cmd>lua require('dap').step_into()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Step into" }))
+    map("n", "<leader>do", "<cmd>lua require('dap').step_over()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Step over" }))
+    map("n", "<leader>dO", "<cmd>lua require('dap').step_out()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Step out" }))
+    map("n", "<leader>dr", "<cmd>lua require('dap').restart()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Restart" }))
+    map("n", "<leader>dq", "<cmd>lua require('dap').terminate()<CR>", vim.tbl_extend("force", dopts, { desc = "DAP: Terminate" }))
   '';
 }

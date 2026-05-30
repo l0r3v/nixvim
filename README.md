@@ -18,8 +18,8 @@ To install it, you can add it to your flake inputs:
     };
 ```
 
-There are two different packages in the flake, "default" (or "bare") and "full". The only difference is in the luasnip, vimtex and cmp plugins.
-Basically I am using the "bare" package for my homelab and full for everything else. I have no need for my homelab to have the tex plugins. The default is "bare", so to access the "full" package you have to write:
+There are two different packages in the flake, "default" (or "bare") and "full". The "full" package adds heavier plugins: blink-cmp (completion), luasnip (snippets), conform-nvim (formatting), dap (debugging), gitsigns, trouble, vimtex, and which-key.
+I use "bare" for my homelab and "full" for everything else. The default is "bare", so to access the "full" package you have to write:
 
 ```bash
     nix run github:l0r3v/nixvim#full

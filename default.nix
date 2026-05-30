@@ -3,11 +3,6 @@
   mode ? "bare",
   ...
 }: {
-  options.mode = lib.mkOption {
-    type = lib.types.enum ["full" "bare"];
-    default = "bare";
-    description = "Versions (full/bare)";
-  };
   imports =
     [
       ./config
