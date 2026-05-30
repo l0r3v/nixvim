@@ -1,4 +1,4 @@
-{...}: {
+_: {
   plugins = {
     treesitter = {
       enable = true;
@@ -8,6 +8,7 @@
           "markdown"
           "markdown_inline"
           "latex"
+          "c_sharp"
         ];
         highlight = {
           enable = true;

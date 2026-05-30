@@ -43,6 +43,10 @@ tex_utils.in_tikz = function() -- TikZ picture environment detection
 	return tex_utils.in_env("tikzpicture")
 end
 
+local line_begin = function()
+	return vim.fn.col(".") == 1
+end
+
 return {
 	s(
 		{ trig = "fn", name = "footnote", dscr = "Footnote with optional visual text" },
@@ -175,10 +179,10 @@ return {
 	s({ trig = "sr", snippetType = "autosnippet" }, { t("^2") }),
 
 	-- Snippet
-	s({ trig = "@8", snippetType = "autosnippet", condtion = tex_utils.in_mathzone }, { t("\\infty") }),
+	s({ trig = "@8", snippetType = "autosnippet", condition = tex_utils.in_mathzone }, { t("\\infty") }),
 
 	-- Snippet
-	s({ trig = "ittt", snippetType = "autosnippet", condtion = tex_utils.in_itemize }, { t("\\item") }),
+	s({ trig = "ittt", snippetType = "autosnippet", condition = tex_utils.in_itemize }, { t("\\item") }),
 
 	-- Snippet
 	s(

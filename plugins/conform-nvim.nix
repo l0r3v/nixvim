@@ -6,6 +6,8 @@
     rustfmt # Rust
     black # Python
     gdtoolkit_4 # GDscript
+    csharpier # C#
+    prettier # JS/TS/JSON/YAML/Markdown
   ];
   plugins.conform-nvim = {
     enable = true;
@@ -23,6 +25,7 @@
         markdown = ["prettier"];
         python = ["black"];
         gdscript = ["gdformat"];
+        cs = ["csharpier"];
       };
 
       format_on_save = {

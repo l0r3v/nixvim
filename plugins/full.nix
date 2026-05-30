@@ -2,6 +2,7 @@
   imports = [
     ./blink-cmp.nix
     ./conform-nvim.nix
+    ./dap.nix
     ./gitsigns.nix
     ./luasnip/luasnip.nix
     ./trouble.nix

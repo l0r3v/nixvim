@@ -38,7 +38,7 @@
 
           config.tools = {
             deadnix.enable = true;
-            nixpkgs-fmt.enable = true;
+            alejandra.enable = true;
             statix.enable = true;
           };
         }

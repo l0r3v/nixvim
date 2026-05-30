@@ -154,18 +154,23 @@
     map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
 
     -- =====================
-    -- 🧠 LSP mappings
+    -- 🧠 LSP mappings (buffer-local, only when LSP is attached)
     -- =====================
-    map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-    map("n", "<leader>gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-    map("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-    map("n", "<leader>gr", vim.lsp.buf.references, { desc = "List references" })
-    map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-    map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
-    map("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover documentation" })
-    map("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show diagnostic info" })
-    map("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-    map("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local bopts = { buffer = args.buf, noremap = true, silent = true }
+        map("n", "<leader>gd", vim.lsp.buf.definition, vim.tbl_extend("force", bopts, { desc = "Go to definition" }))
+        map("n", "<leader>gD", vim.lsp.buf.declaration, vim.tbl_extend("force", bopts, { desc = "Go to declaration" }))
+        map("n", "<leader>gi", vim.lsp.buf.implementation, vim.tbl_extend("force", bopts, { desc = "Go to implementation" }))
+        map("n", "<leader>gr", vim.lsp.buf.references, vim.tbl_extend("force", bopts, { desc = "List references" }))
+        map("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", bopts, { desc = "Code action" }))
+        map("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", bopts, { desc = "Rename symbol" }))
+        map("n", "<leader>k", vim.lsp.buf.hover, vim.tbl_extend("force", bopts, { desc = "Hover documentation" }))
+        map("n", "<leader>dl", vim.diagnostic.open_float, vim.tbl_extend("force", bopts, { desc = "Show diagnostic info" }))
+        map("n", "<leader>dn", vim.diagnostic.goto_next, vim.tbl_extend("force", bopts, { desc = "Next diagnostic" }))
+        map("n", "<leader>dp", vim.diagnostic.goto_prev, vim.tbl_extend("force", bopts, { desc = "Previous diagnostic" }))
+      end,
+    })
 
     -- =====================
     -- 🧩 Editing migliorato
@@ -173,16 +178,6 @@
     map("n", "J", "mzJ`z", opts)                                -- Mantieni il cursore al centro dopo join
     map("x", "<leader>p", "\"_dP", { desc = "Paste without losing yank" }) -- Incolla senza perdere clipboard
     map("n", "Y", "yg$", { desc = "Yank until end of line" })
-
-    -- =====================
-    -- 🔍 Telescope quick access
-    -- =====================
-    local tlsc = require('telescope.builtin')
-    map("n", "<leader>ff", tlsc.find_files, { desc = "Find files" })
-    map("n", "<leader>fb", tlsc.buffers, { desc = "List buffers" })
-    map("n", "<leader>fg", tlsc.live_grep, { desc = "Live grep" })
-    map("n", "<leader>fs", function() tlsc.grep_string({ search = vim.fn.input("Grep > ")}) end, { desc = "Search string" })
-    map("n", "<C-p>", tlsc.git_files, { desc = "Git files" })
 
     -- =====================
     -- ⚙️ Varie

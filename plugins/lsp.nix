@@ -4,7 +4,6 @@
   ...
 }: let
   inherit (lib) getExe;
-  inherit (pkgs.stdenv.hostPlatform) system;
 in {
   plugins = {
     lsp = {
@@ -14,6 +13,14 @@ in {
         gdscript = {
           enable = true;
           package = null;
+        };
+        omnisharp = {
+          enable = true;
+          settings = {
+            enableRoslynAnalyzers = true;
+            enableEditorConfigSupport = true;
+            enableImportCompletion = true;
+          };
         };
         ts_ls.enable = true;
         lua_ls.enable = true;
@@ -28,19 +35,9 @@ in {
 
         nixd = {
           enable = true;
-          settings = let
-            flake = ''(builtins.getFlake "/home/lorev/nixos/XPSnixos")'';
-          in {
-            nixpkgs = {
-              expr = "import ${flake}.inputs.nixpkgs { }";
-            };
+          settings = {
             formatting = {
               command = ["${getExe pkgs.alejandra}"];
-            };
-            options = {
-              nixvim.expr = ''${flake}.inputs.nixvim.packages.${system}.default.options'';
-              home-manager.expr = ''${flake}.nixosConfigurations.XPSnixos.options.home-manager.users.type.getSubOptions []'';
-              nixos.expr = ''${flake}.nixosConfigurations.XPSnixos.options'';
             };
           };
         };

@@ -186,7 +186,7 @@ return {
 	)
 	),
 
-	s({trig = "fi",condtion=tex_utils.in_mathzone},
+	s({trig = "fi",condition=tex_utils.in_mathzone},
 	fmta("\\frac{<>}{<>}",
 	{
 		d(1, get_visual),
@@ -205,7 +205,7 @@ return {
 	)
 	),
 
-	s({trig = "DD",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "DD",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\dermat{<>}{t}",
 	{
 		i(1),
@@ -213,11 +213,11 @@ return {
 	)
 	),
 
-	s({trig = "dd",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "dd",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	{t("{\\diff}"),}
 	),
 
-	s({trig = "pp",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "pp",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\pdev{<>}{<>}",
 	{
 		i(1),
@@ -226,7 +226,7 @@ return {
 	)
 	),
 
-	s({trig = "dpp",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "dpp",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\pdev{^2<>}{<>^2}",
 	{
 		i(1),
@@ -235,7 +235,7 @@ return {
 	)
 	),
 
-	s({trig = "sq",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "sq",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\sqrt{<>}",
 	{
 		i(1),
@@ -243,7 +243,7 @@ return {
 	)
 	),
 
-	s({trig = "'q",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "'q",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\sqrt{<>}",
 	{
 		d(1,get_visual),
@@ -251,7 +251,7 @@ return {
 	)
 	),
 
-	s({trig = "in",snippetType='snippet',condtion=tex_utils.in_mathzone},
+	s({trig = "in",snippetType='snippet',condition=tex_utils.in_mathzone},
 	fmta("\\integral{<>}{<>}{<>}{<>}",
 	{
 		i(1),
@@ -262,7 +262,7 @@ return {
 	)
 	),
 
-	s({trig = "sum",snippetType='snippet',condtion=tex_utils.in_mathzone},
+	s({trig = "sum",snippetType='snippet',condition=tex_utils.in_mathzone},
 	fmta("\\sum_{<>}^{<>}",
 	{
 		i(1),
@@ -271,14 +271,14 @@ return {
 	)
 	),
 
-	s({trig = "cos",snippetType='snippet',condtion=tex_utils.in_mathzone},
+	s({trig = "cos",snippetType='snippet',condition=tex_utils.in_mathzone},
 	fmta("\\cos {<>}",
 	{
 		i(1),
 	}
 	)
 	),
-	s({trig = "sin",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "sin",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\sin {<>}",
 	{
 		i(1),
@@ -286,7 +286,7 @@ return {
 	)
 	),
 
-	s({trig = "nrmm",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "nrmm",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\| <> \\|",
 	{
 		i(1),
@@ -294,7 +294,7 @@ return {
 	)
 	),
 
-	s({trig = "dot",snippetType='autosnippet',condtion=tex_utils.in_mathzone},
+	s({trig = "dot",snippetType='autosnippet',condition=tex_utils.in_mathzone},
 	fmta("\\dot{<>}",
 	{
 		i(1),
